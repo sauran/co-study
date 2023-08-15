@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Store</title>
+</head>
+<body>
+    <h1>Create Library</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="library_name">Library Name:</label>
+        <input type="text" name="library_name" required><br><br>
+        
+        <label for="address">Address:</label>
+        <input type="text" name="address" required><br><br>
+    
+        
+        <label for="prices">Pricing:</label>
+        <input type="text" name="prices" required><br><br>
+
+        <label for="Total Number of Seats">Total Seats</label>
+        <input type="number" name="total_seats" required><br><br>
+
+        <label for="Currently Available Seats">Number of Seats Currently Available</label>
+        <input type="number" name="available_seats" required><br><br>
+
+        <label for="images">Images:</label>
+        <input type="file" name="images" accept="image/*" multiple required><br><br>
+        
+        <button type="submit">Create Library</button>
+    </form>
+</body>
+</html>
