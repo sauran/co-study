@@ -2,11 +2,139 @@
 <html>
 <head>
     <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f5f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            padding: 20px;
+        }
+        .header a {
+            margin-left: 20px;
+        }
+        .search-bar {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: 300px;
+            margin-bottom: 10px;
+        }
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        .results-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .welcome-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
-<body>  
-    <h1>Welcome to Our Website!</h1>
-    <p>We're glad you're here.</p>
-    <p><a href="{{ url_for('user_login') }}">User Login</a></p>
-    <p><a href="{{ url_for('create_library_profile') }}">Create Library Profile</a></p>
+<body>
+    {# <div class="header"> 
+        <a href="{{ url_for('user_login') }}">Login/Sign Up</a> 
+        <a href="{{ url_for('owner_login') }}">Join Study Venue</a> 
+    </div> #} 
+
+    <div class="welcome-container">
+        <h1>Welcome to Study Venue!</h1>
+        <form method="post" action="{{ url_for('index') }}">
+            <select name="selected_city" class="search-bar">
+                <option value="">Search By City</option>
+                {% for city in unique_cities %}
+                    <option value="{{ city[0] }}">{{ city[0] }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Search" class="search-button">
+        </form>
+    </div>
+    
+
+    <div class="results-container">
+        {% if libraries %}
+            <h3>Search Results:</h3>
+            <table>
+                <tr>
+                    <th>Library Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <!-- <th>Pincode</th>
+                    <th>Timings</th>
+                    <th>Pricing</th>
+                    <th>Amenties</th>
+                    <th>Owner Contact Info</th> -->
+                    <th>View Details</th>
+                    
+                </tr>
+                {% for lib in libraries %}
+                    <tr>
+                        <td>{{ lib['lib_name'] }}</td>
+                        <td>{{ lib['lib_address'] }}</td>
+                        <td>{{ lib['lib_city'] }}</td>
+                        <!-- <td>{{ lib['lib_pincode'] }}</td>
+                        <td>{{ lib['lib_timings'] }}</td>
+                        <td>{{ lib['lib_pricing'] }}</td>
+                        <td>{{ lib['lib_amenties'] }}</td>
+                        <td>{{ lib['lib_ownercontactinfo'] }}</td> -->
+                        <td><a href="{{ url_for('library_details', lib_id=lib['lib_id']) }}" target="_blank">Details</a></td>
+                        
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+
 </body>
 </html>

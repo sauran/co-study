@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Login</title>
+    <title>Owner Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,23 +63,24 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>User Login Page</h1>
-         <!-- Display the error message if it's available -->
-         {% if error_message %}
+        <h1>Owner Login Page</h1>
+        <!-- Display the error message if it's available -->
+        {% if error_message %}
          <p style="color: red;">{{ error_message }}</p>
      {% endif %}
-         <!-- <form action="{{ url_for('user_login') }}" method="post">  -->
-            <label for="mobile">Mobile Number:</label>
-            <input type="text" id="mobile" name="mobile">
+        
+        <form action="{{ url_for('owner_login') }}" method="post">
+
+            <label for="username">User Name</label>
+            <input type="text" id="username" name="username">
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
             
             <input type="submit" value="Login">
         </form>
-
-       
-        <!-- <p>Don't have an account? <a href="{{ url_for('user_signup') }}">Sign up</a></p> -->
+ 
+         <p>Don't have an account? <a href="{{ url_for('owner_signup') }}">Sign up</a></p>
     </div>
 </body>
 </html>

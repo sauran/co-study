@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Login</title>
+    <title>Owner Signup</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,22 +13,26 @@
             align-items: center;
             height: 100vh;
         }
-        .login-container {
+        .signup-container {
             background-color: #ffffff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 400px;
         }
         h1 {
             color: #007bff;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
+            text-align: left;
             margin-bottom: 8px;
+            font-weight: bold;
         }
         input[type="text"],
+        input[type="email"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
@@ -38,6 +42,7 @@
             box-sizing: border-box;
         }
         input[type="text"]:focus,
+        input[type="email"]:focus,
         input[type="password"]:focus {
             border-color: #007bff;
         }
@@ -62,24 +67,29 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>User Login Page</h1>
-         <!-- Display the error message if it's available -->
-         {% if error_message %}
-         <p style="color: red;">{{ error_message }}</p>
-     {% endif %}
-         <!-- <form action="{{ url_for('user_login') }}" method="post">  -->
-            <label for="mobile">Mobile Number:</label>
-            <input type="text" id="mobile" name="mobile">
+    <div class="signup-container">
+        <h1>Owner Signup Page</h1>
+        
+        <form action="{{ url_for('owner_signup') }}" method="post">
+            <label for="owner_fullname">Full Name:</label>
+            <input type="text" id="owner_fullname" name="owner_fullname">
             
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+            <label for="owner_mobileno">Mobile Number:</label>
+            <input type="text" id="owner_mobileno" name="owner_mobileno">
             
-            <input type="submit" value="Login">
+            <label for="owner_emailid">Email:</label>
+            <input type="email" id="owner_emailid" name="owner_emailid">
+            
+            <label for="owner_username">Username:</label>
+            <input type="text" id="owner_username" name="owner_username">
+            
+            <label for="owner_password">Password:</label>
+            <input type="password" id="owner_password" name="owner_password">
+            
+            <input type="submit" value="Sign Up">
         </form>
-
-       
-        <!-- <p>Don't have an account? <a href="{{ url_for('user_signup') }}">Sign up</a></p> -->
+        
+        <p>Already have an account? <a href="{{ url_for('owner_login') }}">Login</a></p>
     </div>
 </body>
 </html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Owner Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f5f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 150%; /* Adjust the width for responsiveness */
+            max-width: 400px; /* Limit the maximum width */
+            box-sizing: border-box; /* Ensure padding and border don't increase width */
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Library Details</h2>
+        
+        <form action="{{ url_for('add_library') }}" method="post" enctype="multipart/form-data">
+            <label for="lib_name">Library Name:</label>
+            <input type="text" id="lib_name" name="lib_name">
+
+            <label for="lib_address">Library Address:</label>
+            <input type="text" id="lib_address" name="lib_address">
+
+            <label for="lib_city">Library City:</label>
+            <input type="text" id="lib_city" name="lib_city">
+            
+            <label for="lib_pincode">Library Pincode:</label>
+            <input type="text" id="lib_pincode" name="lib_pincode">
+            
+            <label for="lib_timings">Library Timings:</label>
+            <input type="text" id="lib_timings" name="lib_timings">
+            
+            <label for="lib_pricing">Library Pricing:</label>
+            <input type="text" id="lib_pricing" name="lib_pricing">
+            
+            <label for="lib_amenties">Library Amenities:</label>
+            <input type="text" id="lib_amenties" name="lib_amenties">
+            
+            <label for="lib_images">Library Images:</label>
+            <input type="file" id="lib_images" name="lib_images[]" accept="image/*" multiple>
+            
+            <label for="lib_ownercontactinfo">Library Owner Contact Info:</label>
+            <input type="text" id="lib_ownercontactinfo" name="lib_ownercontactinfo">
+            
+            <input type="submit" value="Add Library">
+        </form>
+    </div>
+</body>
+</html>

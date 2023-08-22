@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Owner Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f5f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .profile-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f7f7f7;
+            font-weight: bold;
+        }
+        .action-link {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .action-link:hover {
+            text-decoration: underline;
+        }
+        .logout-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .logout-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Owner Profile</h1>
+        
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td><strong>Owner ID:</strong></td>
+                <td>{{ owner.owner_id }}</td>
+            </tr>
+            <tr>
+                <td><strong>Full Name:</strong></td>
+                <td>{{ owner.owner_fullname }}</td>
+            </tr>
+            <tr>
+                <td><strong>Mobile Number:</strong></td>
+                <td>{{ owner.owner_mobileno }}</td>
+            </tr>
+            <tr>
+                <td><strong>Email:</strong></td>
+                <td>{{ owner.owner_emailid }}</td>
+            </tr>
+        </table>
+        
+        <h2>Libraries Added:</h2>
+        <table>
+            <tr>
+                <th>Library Id</th>
+                <th>Library Name</th>
+                <th>Pincode</th>
+                <th>Address</th>
+                <th>Timings</th>
+                <th>Pricing</th>
+            </tr>
+            {% for library in libraries %}
+                <tr>
+                    <td>{{ library.lib_id }}</td>
+                    <td>{{ library.lib_name }}</td>
+                    <td>{{ library.lib_pincode }}</td>
+                    <td>{{ library.lib_address }}</td>
+                    <td>{{ library.lib_timings }}</td>
+                    <td>{{ library.lib_pricing }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        <a class="action-link" href="{{ url_for('add_library') }}" target="_blank">Add New Library Details</a>
+        
+        <form action="{{ url_for('owner_login') }}" method="get">
+            <input class="logout-button" type="submit" value="Logout">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Details</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="library-details-container">
+        <h1>Library Details</h1>
+        <table>
+            <tr>
+                <td><strong>Library Name:</strong></td>
+                <td>{{ library.lib_name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Address:</strong></td>
+                <td>{{ library.lib_address }}</td>
+            </tr>
+            <tr>
+                <td><strong>City:</strong></td>
+                <td>{{ library.lib_city }}</td>
+            </tr>
+            <tr>
+                <td><strong>Pincode:</strong></td>
+                <td>{{ library.lib_pincode }}</td>
+            </tr>
+            <tr>
+                <td><strong>Timings:</strong></td>
+                <td>{{ library.lib_timings }}</td>
+            </tr>
+            <tr>
+                <td><strong>Pricing:</strong></td>
+                <td>{{ library.lib_pricing }}</td>
+            </tr>
+            <tr>
+                <td><strong>Amenties:</strong></td>
+                <td>{{ library.lib_amenties }}</td>
+            </tr>
+            <tr>
+                <td><strong>Owner Contact Info:</strong></td>
+                <td>{{ library.lib_ownercontactinfo }}</td>
+            </tr>
+            <tr>
+                <td><strong>Images:</strong></td>
+                <td>
+                    {% for image in library.lib_images.split(';') %}
+                    <p>Image: {{ image }}</p>
+                    <body>
+                        <img src= "{{url_for('static', filename=image)}}" >
+                    </body>
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
