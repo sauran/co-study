@@ -6,8 +6,8 @@ import MySQLdb
 app = Flask(__name__)
 app.static_url_path = '/static'
 app.static_folder = 'static'
-app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'images') 
-print("app config is :", app.config['UPLOAD_FOLDER']) # Folder to store uploaded images
+app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'images') # Folder to store uploaded images
+
 
 @app.route('/', methods=['GET', 'POST'])  # Add 'GET' and 'POST' methods here
 def index():
@@ -18,6 +18,16 @@ def index():
         return render_template('index.html', libraries=libraries, selected_city=selected_city,unique_cities=unique_cities)
     
     return render_template('index.html', unique_cities=unique_cities)
+
+@app.route('/search_results', methods=['POST'])
+def search_results():
+    unique_cities = get_unique_cities()
+    if request.method == 'POST':
+        selected_city = request.form.get('selected_city')
+        libraries = search_libraries_by_city(selected_city)
+        return render_template('lib_search_result_list.html', libraries=libraries, selected_city=selected_city,unique_cities=unique_cities)
+    
+    return render_template('lib_search_results_list.html', unique_cities=unique_cities)
 
 def get_unique_cities():
     connection = MySQLdb.connect(host='localhost', user='sauran', password='mysql', db='db_library')
@@ -58,14 +68,14 @@ def search_libraries(pincode):
     return libraries
 
 # Function to get libraries added by a specific owner
-""" def get_libraries_by_owner(owner_username):
+def get_libraries_by_owner(owner_username):
     conn = MySQLdb.connect(host='localhost', user='sauran', password='mysql', db='db_library')
     cursor = conn.cursor(MySQLdb.cursors.DictCursor)
     query = "SELECT * FROM library WHERE owner_username = %s"
     cursor.execute(query, (owner_username,))
     libraries = cursor.fetchall()
     conn.close()
-    return libraries """
+    return libraries
 
 
 @app.route('/library_details/<int:lib_id>')
@@ -75,15 +85,8 @@ def library_details(lib_id):
 
 
 
-@app.route('/search_results', methods=['POST'])
-def search_results():
-    search_pincode = request.form.get('search_pincode')
-    libraries = search_libraries(search_pincode)
-    return render_template('index.html', libraries=libraries)
-
-
 # Define the owner signup route
-""" @app.route('/owner_signup', methods=['GET', 'POST'])
+@app.route('/owner_signup', methods=['GET', 'POST'])
 def owner_signup():
     if request.method == 'POST':
         owner_fullname = request.form['owner_fullname']
@@ -103,10 +106,10 @@ def owner_signup():
         # You can redirect to the login page after successful signup
         return redirect(url_for('owner_login'))
 
-    return render_template('owner_signup.html') """
+    return render_template('owner_signup.html') 
 
 # Define the owner login route
-""" @app.route('/owner_login', methods=['GET', 'POST'])
+@app.route('/owner_login', methods=['GET', 'POST'])
 def owner_login():
     if request.method == 'POST':
         username = request.form['username']
@@ -128,7 +131,7 @@ def owner_login():
             error_message = "Invalid username or password."
             return render_template('owner_login.html', error_message=error_message)
 
-    return render_template('owner_login.html') """
+    return render_template('owner_login.html')
 
 
 # Define the route to add library details
@@ -172,6 +175,7 @@ def add_library():
         connection.close()
 
         return redirect(" Added Sucessfully")
+    
     
     return render_template('add_library_details.html')  # Display the library details form
 
@@ -247,6 +251,10 @@ def user_profile():
 
     return render_template('user_profile.html')  # Display the user profile page """
 
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

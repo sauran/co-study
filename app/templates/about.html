@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='company_logo.png') }}" alt="Company Logo">
+            <div class="container">
+                <div class="logo">Study Venue</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('owner_login') }}">Add Your Library</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <h1>About Us</h1>
+    <p>Empowering Minds, Connecting Spaces: We envision a future where learning knows no boundaries. Our platform, Study Venue, unites co-study centers and libraries nationwide, fostering collaboration, knowledge sharing, and personal growth. By bridging the gaps between learners and resources, we strive to create a dynamic and inclusive ecosystem that propels individuals toward their educational aspirations.</p>
+</body>
+<footer>
+    <div class="container">
+        <p>&copy; 2023 Study Venue. All rights reserved.</p>
+    </div>
+</footer>
+</html>

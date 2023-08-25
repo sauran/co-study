@@ -1,59 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Details</title>
-    <style>
-        /* Your CSS styles here */
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="library-details-container">
-        <h1>Library Details</h1>
-        <table>
-            <tr>
-                <td><strong>Library Name:</strong></td>
-                <td>{{ library.lib_name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Address:</strong></td>
-                <td>{{ library.lib_address }}</td>
-            </tr>
-            <tr>
-                <td><strong>City:</strong></td>
-                <td>{{ library.lib_city }}</td>
-            </tr>
-            <tr>
-                <td><strong>Pincode:</strong></td>
-                <td>{{ library.lib_pincode }}</td>
-            </tr>
-            <tr>
-                <td><strong>Timings:</strong></td>
-                <td>{{ library.lib_timings }}</td>
-            </tr>
-            <tr>
-                <td><strong>Pricing:</strong></td>
-                <td>{{ library.lib_pricing }}</td>
-            </tr>
-            <tr>
-                <td><strong>Amenties:</strong></td>
-                <td>{{ library.lib_amenties }}</td>
-            </tr>
-            <tr>
-                <td><strong>Owner Contact Info:</strong></td>
-                <td>{{ library.lib_ownercontactinfo }}</td>
-            </tr>
-            <tr>
-                <td><strong>Images:</strong></td>
-                <td>
-                    {% for image in library.lib_images.split(';') %}
-                    <p>Image: {{ image }}</p>
-                    <body>
-                        <img src= "{{url_for('static', filename=image)}}" >
-                    </body>
-                    {% endfor %}
-                </td>
-            </tr>
-        </table>
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='company_logo.png') }}" alt="Company Logo">
+            <div class="container">
+                <div class="logo">Study Venue</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('owner_login') }}">Add Your Library</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="library-details">
+        <div class="library-name">{{ library.lib_name }}</div>
+        <div class="library-address">{{ library.lib_address }}</div>
+        <div class="library-city">{{ library.lib_city }}</div>
+        <div class="library-pincode">{{ library.lib_pincode }}</div>
+
+        <div class="library-info">
+            <div class="library-timings">
+                <h3>Library Timings</h3>
+                <p>{{ library.lib_timings }}</p>
+            </div>
+            <div class="library-pricing">
+                <h3>Pricing</h3>
+                <p>{{ library.lib_pricing }}</p>
+            </div>
+            <div class="library-amenities">
+                <h3>Amenities</h3>
+                <p>{{ library.lib_amenties }}</p>
+            </div>
+        </div>
+
+        <div class="library-images">
+            <div class="carousel-slide">
+                {% for image in library.lib_images.split(';') %}
+                    <img class="carousel-image" src="{{ url_for('static', filename=image) }}" alt="Library Image">
+                {% endfor %}
+            </div>
+            <button class="carousel-button prev-button" onclick="prevSlide()">Previous</button>
+            <button class="carousel-button next-button" onclick="nextSlide()">Next</button>
+        </div>
+        <div class="contact-info">
+            <h3>Owner Information</h3>
+            {{ library.lib_ownercontactinfo }}
+        </div>
     </div>
+
+    <script>
+        const slideContainer = document.querySelector('.carousel-slide');
+const slides = document.querySelectorAll('.carousel-image');
+let currentSlideIndex = 0;
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        if (i === index) {
+            slide.style.display = 'block';
+        } else {
+            slide.style.display = 'none';
+        }
+    });
+}
+
+function nextSlide() {
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+    showSlide(currentSlideIndex);
+}
+
+function prevSlide() {
+    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+    showSlide(currentSlideIndex);
+}
+
+// Initialize the first slide
+showSlide(currentSlideIndex);
+
+    </script>
 </body>
 </html>

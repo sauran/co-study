@@ -1,140 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Welcome Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f5f7;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .header {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-            padding: 20px;
-        }
-        .header a {
-            margin-left: 20px;
-        }
-        .search-bar {
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            width: 300px;
-            margin-bottom: 10px;
-        }
-        .search-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .search-button:hover {
-            background-color: #0056b3;
-        }
-        .results-container {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 500px;
-        }
-        .welcome-container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-        h1 {
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-        p {
-            margin-bottom: 15px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    {# <div class="header"> 
-        <a href="{{ url_for('user_login') }}">Login/Sign Up</a> 
-        <a href="{{ url_for('owner_login') }}">Join Study Venue</a> 
-    </div> #} 
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='company_logo.png') }}" alt="Company Logo">
+            <div class="container">
+                <div class="logo">Study Venue</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('owner_login') }}">Add Your Library</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-    <div class="welcome-container">
-        <h1>Welcome to Study Venue!</h1>
-        <form method="post" action="{{ url_for('index') }}">
-            <select name="selected_city" class="search-bar">
-                <option value="">Search By City</option>
-                {% for city in unique_cities %}
-                    <option value="{{ city[0] }}">{{ city[0] }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Search" class="search-button">
-        </form>
-    </div>
-    
+    <section class="hero">
+        <div class="container" >
+            <h1>Welcome To Study Venue</h1>
+            <!-- <p>Find the Perfect Co-Study Center or Library Near You</p> -->
+            <form method="post" action="{{ url_for('search_results') }}">
+                <select name="selected_city" class="search-bar">
+                    <option value="">Search By City</option>
+                    {% for city in unique_cities %}
+                        <option value="{{ city[0] }}">{{ city[0] }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Search" class="btn" formtarget="_blank" >
+            </form>
+        </div>
+    </section>
 
-    <div class="results-container">
-        {% if libraries %}
-            <h3>Search Results:</h3>
-            <table>
-                <tr>
-                    <th>Library Name</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <!-- <th>Pincode</th>
-                    <th>Timings</th>
-                    <th>Pricing</th>
-                    <th>Amenties</th>
-                    <th>Owner Contact Info</th> -->
-                    <th>View Details</th>
-                    
-                </tr>
-                {% for lib in libraries %}
-                    <tr>
-                        <td>{{ lib['lib_name'] }}</td>
-                        <td>{{ lib['lib_address'] }}</td>
-                        <td>{{ lib['lib_city'] }}</td>
-                        <!-- <td>{{ lib['lib_pincode'] }}</td>
-                        <td>{{ lib['lib_timings'] }}</td>
-                        <td>{{ lib['lib_pricing'] }}</td>
-                        <td>{{ lib['lib_amenties'] }}</td>
-                        <td>{{ lib['lib_ownercontactinfo'] }}</td> -->
-                        <td><a href="{{ url_for('library_details', lib_id=lib['lib_id']) }}" target="_blank">Details</a></td>
-                        
-                    </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
-    </div>
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Our Features</h2>
+            <div class="features-row">
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='wide_network.jpg') }}" alt="Feature 1">
+                    <h3>Wide Network</h3>
+                    <p>Access a wide network of co-study centers and libraries to choose from.</p>
+                </div>
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='book_online.jpg') }}" alt="Feature 2">
+                    <h3>Select And Book</h3>
+                    <p>Select and book your choice of seat from the comfort of your home.</p>
+                </div>
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='reviews.jpg') }}" alt="Feature 3">
+                    <h3>User Reviews</h3>
+                    <p>Read reviews from other users to make informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have a question or want to know more? Get in touch!</p>
+            <p> Mail to demo_email@gmail.com</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Study Venue. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

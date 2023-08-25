@@ -2,11 +2,57 @@
 <html>
 <head>
     <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Search Results</h1>
-    <p>State: {{ state }}</p>
-    <p>City: {{ city }}</p>
-    <!-- Add more content if needed -->
+    <header>
+        <nav>
+            <img src="{{ url_for('static', filename='company_logo.png') }}" alt="Company Logo">
+            <div class="container">
+                <div class="logo">Study Venue</div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('owner_login') }}">Add Your Library</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div >
+        <h1>Library Search Results</h1>
+    </div>
+    <section class="results-container">
+        {% if libraries %}
+          <h3>Search Results:</h3>
+          <div class="custom-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Library Name</th>
+                  <th>Address</th>
+                  <th>City</th>
+                  <th>View Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for lib in libraries %}
+                  <tr>
+                    <td>{{ lib['lib_name'] }}</td>
+                    <td>{{ lib['lib_address'] }}</td>
+                    <td>{{ lib['lib_city'] }}</td>
+                    <td><a href="{{ url_for('library_details', lib_id=lib['lib_id']) }}" target="_blank" class="btn">Details</a></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+      </section>
+      
+      <footer>
+        <div class="container">
+            <p>&copy; 2023 Study Venue. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
