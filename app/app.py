@@ -174,7 +174,7 @@ def add_library():
         connection.commit()
         connection.close()
 
-        return redirect(" Added Sucessfully")
+        return render_template('added_succesfully.html')
     
     
     return render_template('add_library_details.html')  # Display the library details form

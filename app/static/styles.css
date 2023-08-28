@@ -23,8 +23,9 @@ header {
   background-position: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
+  align-items: center;
   color: #3498db; /* Text color for contrast */
   padding: 10px 0;
 }
@@ -38,12 +39,14 @@ nav {
 .logo {
   font-size: 24px;
   font-weight: bold;
+  color: #f39c12;
 }
 
 .nav-links {
   list-style: none;
   color: #3498db;
   display: flex;
+  gap: 1rem;
 }
 
 .nav-links li {
@@ -53,6 +56,11 @@ nav {
 .nav-links a {
   text-decoration: none;
   color: #2E2E2E; /* Text color for contrast */
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #f39c12;
 }
 
 /* Hero Section */
@@ -93,7 +101,7 @@ nav {
   margin-top: 30px;
 }
 .features {
-  padding: 100px 0;
+  padding: 30px 0;
   text-align: center;
 }
 
@@ -127,7 +135,7 @@ nav {
 /* Contact Section */
 .contact {
   max-width: auto;
-  padding: 100px 0;
+  padding: 30px 0;
   text-align: center;
 }
 
@@ -199,25 +207,65 @@ tbody tr:hover {
 /* Basic styling for library details */
 .library-details {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 100%;
+  margin: 2rem auto; 
+  padding: 2rem;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.library-header {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem; /* Add space between header and other content */
 }
 
+.library-info {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  border: 1px solid #ccc; /* Add a 1px solid border */
+  padding: 1rem; /* Add padding to create space between the border and content */
+  border-radius: 8px;
+}
 /* Styling for library name */
 .library-name {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 1.2rem;
+   font-weight: bold; 
+  margin-bottom: 0.5rem;
+}
+.library-basicinfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Styling for library location */
-.library-location {
-  color: #666;
-  margin-bottom: 10px;
-}
+.library-address,
+    .library-city,
+    .library-pincode {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .library-timings,
+    .library-pricing,
+    .library-amenities {
+        flex: 1;
+    }
+
+    .library-timings h3,
+    .library-pricing h3,
+    .library-amenities h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
 
 /* Styling for library images */
 .library-images {
@@ -235,32 +283,34 @@ tbody tr:hover {
 
 /* Styling for the carousel container */
 .carousel-slide {
-  display: flex; /* Display images in a row */
-   transition: transform 0.5s ease-in-out;  
-   justify-content: center; /* Center images horizontally */ 
-  overflow: hidden;  
-   white-space: nowrap;  
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+  height : 200px;
 }
 
-/* Styling for the images within the carousel */
 .carousel-image {
-  max-width: 500px; /* Limit maximum width to container width */
-  max-height: 350px; /* Set a maximum height for the images */
-  object-fit: cover; /* Ensure images cover the available space */
-  flex-shrink: 0; /* Prevent images from shrinking when container is narrower */
-  margin-right: 10px; /* Add some space between images */
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Adjustments for the next and previous buttons */
 .carousel-button {
-  margin-top: 10px;
-  background-color: #007BFF;
-  color: #fff;
   border: none;
-  padding: 8px 16px;
+  background-color: #f39c12;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
 }
-
+.carousel-button:hover {
+  background-color: #f39c12;
+}
 .prev-button {
   margin-right: 10px;
 }
@@ -271,7 +321,7 @@ tbody tr:hover {
 
 
 .contact-info {
-  margin-top: 20px;
+  margin-top: 2rem;
   text-align: center;
   padding: 20px;
   background-color: #fff;

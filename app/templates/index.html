@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -28,7 +29,7 @@
             <form method="post" action="{{ url_for('search_results') }}">
                 <select name="selected_city" class="search-bar">
                     <option value="">Search By City</option>
-                    {% for city in unique_cities %}
+                    {% for city in unique_cities|sort %}
                         <option value="{{ city[0] }}">{{ city[0] }}</option>
                     {% endfor %}
                 </select>
@@ -64,7 +65,7 @@
         <div class="container">
             <h2>Contact Us</h2>
             <p>Have a question or want to know more? Get in touch!</p>
-            <p> Mail to demo_email@gmail.com</p>
+            <p> Mail to studyvenue1@gmail.com</p>
         </div>
     </section>
 

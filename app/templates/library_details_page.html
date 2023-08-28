@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Details</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -21,10 +22,12 @@
         </nav>
     </header>
     <div class="library-details">
-        <div class="library-name">{{ library.lib_name }}</div>
-        <div class="library-address">{{ library.lib_address }}</div>
-        <div class="library-city">{{ library.lib_city }}</div>
-        <div class="library-pincode">{{ library.lib_pincode }}</div>
+        <div class = "library-basicinfo">
+            <div class="library-name">{{ library.lib_name }}</div>
+            <div class="library-address">{{ library.lib_address }}</div>
+            <div class="library-city">{{ library.lib_city }}</div>
+            <div class="library-pincode">{{ library.lib_pincode }}</div>
+        </div>
 
         <div class="library-info">
             <div class="library-timings">
